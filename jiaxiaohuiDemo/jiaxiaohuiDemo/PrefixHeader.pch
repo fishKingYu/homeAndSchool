@@ -1,0 +1,64 @@
+//
+//  PrefixHeader.pch
+//  JiaXiaoHui_iOS
+//
+//  Created by debug-04 on 16/4/7.
+//  Copyright © 2016年 Hui home school. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define SCWidth [UIScreen mainScreen].bounds.size.width
+#define SCHeight [UIScreen mainScreen].bounds.size.height
+//颜色和透明度设置
+#define RGBA(r,g,b,a) [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]
+
+
+// 常量文件
+#import "MRConst.h"
+#import "NSString+march.h"
+#import "NSDate+march.h"
+#import "UIImage+march.h"
+#import "MRAFHTTPSessionManager.h"
+#import "UIView+march.h"
+
+//测试url
+#define hostURL  @"http://api.w.metcd.com/"
+//测试后缀url
+#define hostSuffix @"api/http/v3/"
+
+// 缓存有效时间
+#define oneDay 24*60*60*1
+#define threeDay 24*60*60*3
+#define fiveDay 24*60*60*5
+#define sevenDay 24*60*60*7
+
+
+//网络请求
+#define network [NetworkHelper shareinstance]
+#define networkPort NetworkPortHelper shareInstance]
+
+//cell指定图片的高度
+#define MJfirstCellHeight  50
+//cell间隙
+#define MJfirstCellHeightMar 5
+
+typedef NS_ENUM(NSInteger, schoolViewType) {
+    //以下是枚举成员
+    schoolViewTypeOfParentWithNoChild = 0,  // 家长无关联孩子
+    schoolViewTypeOfParentWithChild = 1,    // 家长关联孩子
+    schoolViewTypeOfTeacherWithNoPatrol = 2,// 非督查老师
+    schoolViewTypeOfTeacherWithPatrol = 3   // 督查老师
+};
+
+
+
+
+
+
+
+
+
+
+#endif /* PrefixHeader_pch */

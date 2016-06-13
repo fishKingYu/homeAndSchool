@@ -1,0 +1,13 @@
+platform:ios,'7.0'
+target 'jiaxiaohuiDemo' do 
+pod 'AFNetworking'
+pod 'BaiduMapKit'
+pod 'MJExtension'
+pod 'JTSImageViewController'
+pod 'MMPickerView'
+pod 'MMDrawerController'
+pod 'Masonry'
+pod 'MJRefresh'
+pod 'SDWebImage'
+pod 'SVProgressHUD'
+end
