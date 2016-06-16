@@ -20,7 +20,6 @@
 #import "NSString+march.h"
 #import "NSDate+march.h"
 #import "UIImage+march.h"
-#import "MRAFHTTPSessionManager.h"
 #import "UIView+march.h"
 
 //测试url

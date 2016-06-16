@@ -8,6 +8,11 @@
 
 #import "JHMainTabarController.h"
 #import "JHCustomTabarView.h"
+#import "JHBaseNavigationController.h"
+#import "JHHomeViewController.h"
+#import "JHDynamicViewController.h"
+#import "JHMyInfoViewController.h"
+
 @interface JHMainTabarController ()<JHCustomTabarViewDelegate>
 
 @end
@@ -30,39 +35,33 @@
     
     // 添加到view 上面
     [self.tabBar addSubview:customTabBar];
-    
-    // 动态创建tabbar 按钮个数
-    for (int i = 0; i < self.viewControllers.count; i ++) {
-        // 拼接图片名字
-        NSString *normalImageName = [NSString stringWithFormat:@"TabBar%d",i + 1];
-        NSString *selectedImageName = [NSString stringWithFormat:@"TabBar%dSel",i + 1];
-        // 动态添加按钮
-        [customTabBar addBtnWithNormalImageName:normalImageName selectedImageName:selectedImageName];
-    }
+    // 添加按钮
+    // 首页
+    [customTabBar addBtnWithNormalImageName:@"icom_navigation_home" selectedImageName:@"icom_navigation_home_hover"];
+    // 动态
+    [customTabBar addBtnWithNormalImageName:@"icom_navigation_news" selectedImageName:@"icom_navigation_news_hover"];
+    // 我的
+    [customTabBar addBtnWithNormalImageName:@"icom_navigation_me" selectedImageName:@"icom_navigation_me_hover"];
     
 }
 
 // 加载子控制器
 - (void)loadViewControllers {
     // 首页
-    UINavigationController *homeNavigationController = [self controllerWithStoryboardName:@"GroupBuy"];
-    // 动态
-    UINavigationController *dynamicNavigationController = [self controllerWithStoryboardName:@"Lucky"];
-    // 我的
-    UINavigationController *myInfoNavigationController = [self controllerWithStoryboardName:@"OpenAward"];
+    JHHomeViewController *homeVC = [[JHHomeViewController alloc] init];
+    JHBaseNavigationController *homeNavigationController = [[JHBaseNavigationController alloc] initWithRootViewController:homeVC];
     
-    // 方法一
+    // 动态
+    JHDynamicViewController *dynamicVC = [[JHDynamicViewController alloc] init];
+    JHBaseNavigationController *dynamicNavigationController = [[JHBaseNavigationController alloc] initWithRootViewController:dynamicVC];
+    // 我的
+    JHMyInfoViewController *myInfoVC = [[JHMyInfoViewController alloc] init];
+    JHBaseNavigationController *myInfoNavigationController = [[JHBaseNavigationController alloc] initWithRootViewController:myInfoVC];
+    
+    // 子控制器
     self.viewControllers = @[homeNavigationController, dynamicNavigationController, myInfoNavigationController];
 }
 
-- (UINavigationController *)controllerWithStoryboardName:(NSString *)name {
-    // 要从storyboard 里面加载导航栏控制器
-    UIStoryboard *hallSB = [UIStoryboard storyboardWithName:name bundle:nil];
-    // 要从storyboard 中取出初始化控制器
-    UINavigationController *nav = [hallSB instantiateInitialViewController];
-    
-    return nav;
-}
 
 #pragma mark - 自定义tabbar 的代理回调
 - (void)customTabBar:(JHCustomTabarView *)tabbar didSelectIndex:(NSInteger)index {

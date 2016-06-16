@@ -52,8 +52,8 @@
     // 创建按钮 (如果前面没有换成子类的类型，不能使用子类的方法或者属性)
     JHTabarButton *btn = [JHTabarButton buttonWithType:UIButtonTypeCustom];
     
-    [btn setBackgroundImage:[UIImage imageNamed:normalImageName] forState:UIControlStateNormal];
-    [btn setBackgroundImage:[UIImage imageNamed:selectedImageName] forState:UIControlStateSelected];
+    [btn setImage:[UIImage imageNamed:normalImageName] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:selectedImageName] forState:UIControlStateSelected];
     
     // 把按钮添加到view
     [self addSubview:btn];
@@ -92,7 +92,6 @@
         CGFloat btnX = btnW * i;
         CGFloat btnY = 0;
         if (i == 0) {
-            //                [self btnClick:btn];
             btn.selected = YES;
             self.selectedButton = btn;
         }
