@@ -57,3 +57,33 @@ NSString * const JHGetKey = @"api/http/v3/getMetcdkey.aspx";// 得到key
 NSString * const JHEditClassLogo = @"api/http/v3/setSchoolClassImage.aspx";//修改班级logo
 NSString * const JHGetSchoolMsg = @"api/http/v3/getSchoolInfo.aspx";//学校信息(网页)
 
+NSString * const JHGetPageList = @"api/http/v3/getForumPostsList.aspx";//帖子列表
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

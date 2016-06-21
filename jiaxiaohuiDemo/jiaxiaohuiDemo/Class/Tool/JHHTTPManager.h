@@ -7,7 +7,6 @@
 //
 
 #import <AFNetworking/AFNetworking.h>
-#import "JHUploadParam.h"
 #define JHBaseURL [NSURL URLWithString:@"http://api.w.metcd.com/"]
 
 @interface JHHTTPManager : AFHTTPSessionManager
@@ -21,7 +20,7 @@
  *  @param succeed    成功回调
  *  @param failure    失败回调
  */
-- (void)GET:(NSString *)URLString parameters:(id)parameters succeed:(void (^)(id data))succeed failure:(void (^)(NSError *error))failure;
+- (void)GET:(NSString *)URLString parameters:(id)parameters succeed:(void (^)(id responseObj))succeed failure:(void (^)(NSError *error))failure;
 
 /**
  *  POST请求
@@ -31,5 +30,5 @@
  *  @param succeed    成功回调
  *  @param failure    失败回调
  */
-- (void)POST:(NSString *)URLString parameters:(id)parameters succeed:(void (^)(id data))succeed failure:(void (^)(NSError *error))failure;
+- (void)POST:(NSString *)URLString parameters:(id)parameters succeed:(void (^)(id responseObj))succeed failure:(void (^)(NSError *error))failure;
 @end

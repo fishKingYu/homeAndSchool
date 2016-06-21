@@ -7,6 +7,11 @@
 //
 
 #import "JHMyClassViewController.h"
+#import "MJExtension.h"
+#import "JHMyClassPageModel.h"
+#import "JHChildModel.h"
+#import "JHClassPageListModel.h"
+#import "JHClassesPageResponseModel.h"
 
 @interface JHMyClassViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *mainTableView; //页面主tableview
@@ -17,9 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    
+    // 初始化界面
     [self setupView];
+    
+    // 加载数据
+    [self getSchoolDynamicPageWith:schoolID];
 }
 
 #pragma mark - 初始化界面
@@ -27,12 +34,32 @@
  *  初始化界面
  */
 -(void)setupView{
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.mainTableView];
 }
 
 
 
-
+#pragma mark - 网络请求
+-(void)getSchoolDynamicPageWith:(NSString *)fid{
+    NSMutableDictionary *parms = [NSMutableDictionary dictionary];
+    parms[@"uid"] = userID;
+    parms[@"fid"] = @"";//班级id,返回第一个
+    parms[@"parentFid"] = fid;//学校id
+    parms[@"pageindex"] = @"0";
+    parms[@"pagesize"] = @"10";
+    parms[@"timestamp"] = realTime;
+    parms[@"sign"] = [[[NSString stringWithFormat:@"%@%@%@%@",userID,parms[@"pageindex"],userKey,realTime] marchMd5String]uppercaseString];
+    [[JHHTTPManager sharedManager] GET:JHMyClassInfo parameters:parms succeed:^(id responseObj) {
+        // 解析
+        JHMyClassPageModel *pageModel = [JHMyClassPageModel mj_objectWithKeyValues:responseObj];
+  
+        NSLog(@"返回数据模型%@",pageModel);
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    DLog(@"不是吧%@",parms[@"parentFid"]);
+}
 
 
 
@@ -56,7 +83,6 @@
     if (classPageCell == nil) {
         classPageCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    NSLog(@"你妹");
     classPageCell.textLabel.text = @"吃屎";
     return classPageCell;
 }

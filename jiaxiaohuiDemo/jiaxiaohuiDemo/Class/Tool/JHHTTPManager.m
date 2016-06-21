@@ -38,7 +38,7 @@
  *  @param succeed    成功回调
  *  @param failure    失败回调
  */
-- (void) GET:(NSString *)URLString parameters:(id)parameters succeed:(void (^)(id data))succeed failure:(void (^)(NSError *error))failure{
+- (void) GET:(NSString *)URLString parameters:(id)parameters succeed:(void (^)(id responseObj))succeed failure:(void (^)(NSError *error))failure{
     
     [[JHHTTPManager sharedManager] GET:URLString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
@@ -48,7 +48,7 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
-            failure(error);
+            failure(error); 
         }
     }];
     
@@ -62,7 +62,7 @@
  *  @param succeed    成功回调
  *  @param failure    失败回调
  */
-- (void) POST:(NSString *)URLString parameters:(id)parameters succeed:(void (^)(id data))succeed failure:(void (^)(NSError *error))failure{
+- (void) POST:(NSString *)URLString parameters:(id)parameters succeed:(void (^)(id responseObj))succeed failure:(void (^)(NSError *error))failure{
     [[JHHTTPManager sharedManager] POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (succeed) {

@@ -19,14 +19,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
 //    [application setStatusBarHidden:YES];
 //    // 设置状态栏样式
 //    [application setStatusBarStyle:UIStatusBarStyleLightContent];
-    //
+
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//    // 如果项目在这里初始化,写了很多代码,后面推送的内容必须卸载这里,分享
-//
+
     /// 跳转控制器
     MMDrawerController * drawerController = [self setRootViewController];
     self.drawerController = drawerController;

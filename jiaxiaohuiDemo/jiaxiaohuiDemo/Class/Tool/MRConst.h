@@ -55,4 +55,4 @@ extern NSString * const JHMyClassInfo;
 extern NSString * const JHGetKey;
 extern NSString * const JHEditClassLogo;
 extern NSString * const JHGetSchoolMsg;
-
+extern NSString * const JHGetPageList;
