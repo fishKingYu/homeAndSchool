@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5213B7311D1946D30005AE5B /* JHPageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5213B7301D1946D30005AE5B /* JHPageTableViewCell.m */; };
 		5249E6751D0EABFE005F44DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5249E6741D0EABFE005F44DA /* main.m */; };
 		5249E6781D0EABFE005F44DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5249E6771D0EABFE005F44DA /* AppDelegate.m */; };
 		5249E6801D0EABFE005F44DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5249E67F1D0EABFE005F44DA /* Assets.xcassets */; };
@@ -204,6 +205,8 @@
 /* Begin PBXFileReference section */
 		1624DC1F703EE4F579CF2706 /* libPods-jiaxiaohuiDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-jiaxiaohuiDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCF43632EF65C75957CCC3C /* Pods-jiaxiaohuiDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jiaxiaohuiDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-jiaxiaohuiDemo/Pods-jiaxiaohuiDemo.release.xcconfig"; sourceTree = "<group>"; };
+		5213B72F1D1946D30005AE5B /* JHPageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPageTableViewCell.h; sourceTree = "<group>"; };
+		5213B7301D1946D30005AE5B /* JHPageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageTableViewCell.m; sourceTree = "<group>"; };
 		5249E6701D0EABFE005F44DA /* jiaxiaohuiDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jiaxiaohuiDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5249E6741D0EABFE005F44DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5249E6761D0EABFE005F44DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -805,6 +808,8 @@
 		5249E6C91D0EAC32005F44DA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5213B72F1D1946D30005AE5B /* JHPageTableViewCell.h */,
+				5213B7301D1946D30005AE5B /* JHPageTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1709,6 +1714,7 @@
 				526F706A1D124FDE00621E3C /* JHChildModel.m in Sources */,
 				5249E6FD1D0EAC32005F44DA /* JHCustomTabarView.m in Sources */,
 				52E658191D10E3B800BB0EEC /* JHMyInfoViewController.m in Sources */,
+				5213B7311D1946D30005AE5B /* JHPageTableViewCell.m in Sources */,
 				52E658421D11058300BB0EEC /* MRConst.m in Sources */,
 				526F707A1D12515400621E3C /* JHReplyPageModel.m in Sources */,
 				52E6583B1D11053D00BB0EEC /* NSString+JHPinYinFromChinese.m in Sources */,

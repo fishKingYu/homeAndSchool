@@ -12,6 +12,7 @@
 #import "JHChildModel.h"
 #import "JHClassPageListModel.h"
 #import "JHClassesPageResponseModel.h"
+#import "JHPageTableViewCell.h"
 
 @interface JHMyClassViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *mainTableView; //页面主tableview
@@ -78,12 +79,14 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellID = @"classPageCell";
-    UITableViewCell *classPageCell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (classPageCell == nil) {
-        classPageCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-    }
-    classPageCell.textLabel.text = @"吃屎";
+//    static NSString *cellID = @"classPageCell";
+//    UITableViewCell *classPageCell = [tableView dequeueReusableCellWithIdentifier:cellID];
+//    if (classPageCell == nil) {
+//        classPageCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+//    }
+//    classPageCell.textLabel.text = @"吃屎";
+    JHPageTableViewCell *classPageCell = [JHPageTableViewCell settingCellWithTableView:tableView style:UITableViewCellStyleDefault];
+    
     return classPageCell;
 }
 
