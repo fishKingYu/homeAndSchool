@@ -182,6 +182,7 @@
 		52E6583E1D11053D00BB0EEC /* UIImage+march.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E658351D11053D00BB0EEC /* UIImage+march.m */; };
 		52E6583F1D11053D00BB0EEC /* UIView+march.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E658371D11053D00BB0EEC /* UIView+march.m */; };
 		52E658421D11058300BB0EEC /* MRConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E658411D11058300BB0EEC /* MRConst.m */; };
+		6B88FBFD1D1AD14B00FF3DA4 /* JHPageCellFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B88FBFC1D1AD14B00FF3DA4 /* JHPageCellFrame.m */; };
 		8BBED11A7C1BAA8BFF9C1D20 /* libPods-jiaxiaohuiDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1624DC1F703EE4F579CF2706 /* libPods-jiaxiaohuiDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -416,6 +417,8 @@
 		52E658371D11053D00BB0EEC /* UIView+march.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+march.m"; sourceTree = "<group>"; };
 		52E658401D11058300BB0EEC /* MRConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRConst.h; sourceTree = "<group>"; };
 		52E658411D11058300BB0EEC /* MRConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRConst.m; sourceTree = "<group>"; };
+		6B88FBFB1D1AD14B00FF3DA4 /* JHPageCellFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPageCellFrame.h; sourceTree = "<group>"; };
+		6B88FBFC1D1AD14B00FF3DA4 /* JHPageCellFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageCellFrame.m; sourceTree = "<group>"; };
 		CCEBA5E54C47E372292943F9 /* Pods-jiaxiaohuiDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jiaxiaohuiDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-jiaxiaohuiDemo/Pods-jiaxiaohuiDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -810,6 +813,8 @@
 			children = (
 				5213B72F1D1946D30005AE5B /* JHPageTableViewCell.h */,
 				5213B7301D1946D30005AE5B /* JHPageTableViewCell.m */,
+				6B88FBFB1D1AD14B00FF3DA4 /* JHPageCellFrame.h */,
+				6B88FBFC1D1AD14B00FF3DA4 /* JHPageCellFrame.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1704,6 +1709,7 @@
 				526F70501D124A9A00621E3C /* JHLeftDrawerViewController.m in Sources */,
 				526F706B1D124FDE00621E3C /* JHClassesPageResponseModel.m in Sources */,
 				526F70411D12312600621E3C /* JHHTTPManager.m in Sources */,
+				6B88FBFD1D1AD14B00FF3DA4 /* JHPageCellFrame.m in Sources */,
 				52E658131D10E39000BB0EEC /* JHHomeViewController.m in Sources */,
 				5249E6FE1D0EAC32005F44DA /* JHTabarButton.m in Sources */,
 				526F70761D12508900621E3C /* JHPageImageModel.m in Sources */,

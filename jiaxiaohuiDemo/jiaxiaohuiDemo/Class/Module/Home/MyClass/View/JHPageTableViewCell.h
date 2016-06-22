@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "JHMyClassPageModel.h"
+@class JHPageCellFrame;
 
 @interface JHPageTableViewCell : UITableViewCell
-@property (nonatomic, strong) JHMyClassPageModel *classPageModel; //班级帖子数据模型
+@property (nonatomic, strong) JHClassPageListModel *classPageModel; //班级帖子数据模型
+
+@property(nonatomic,strong)JHPageCellFrame *pageCellFrame;
 
 +(instancetype)settingCellWithTableView:(UITableView *)tableView style:(UITableViewCellStyle)style;
 
