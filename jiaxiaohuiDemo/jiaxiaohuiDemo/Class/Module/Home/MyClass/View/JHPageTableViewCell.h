@@ -9,11 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "JHMyClassPageModel.h"
 @class JHPageCellFrame;
+@protocol JHPageTableViewCellDelegate <NSObject>
+@optional
+-(void)openCell:(UIButton *)button;
+@end
 
 @interface JHPageTableViewCell : UITableViewCell
-@property (nonatomic, strong) JHClassPageListModel *classPageModel; //班级帖子数据模型
-
+// 展开按钮代理
+@property(nonatomic,weak)id<JHPageTableViewCellDelegate> delegate;
+// frame数据源
 @property(nonatomic,strong)JHPageCellFrame *pageCellFrame;
+// cell在tableview中的位置indexpath
+@property(nonatomic,strong)NSIndexPath *indexPath;
 
 +(instancetype)settingCellWithTableView:(UITableView *)tableView style:(UITableViewCellStyle)style;
 

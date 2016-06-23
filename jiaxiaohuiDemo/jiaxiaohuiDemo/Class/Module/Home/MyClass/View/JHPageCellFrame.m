@@ -7,6 +7,10 @@
 //
 
 #import "JHPageCellFrame.h"
+#import "JHClassPageListModel.h"
+@interface JHPageCellFrame()
+@property(nonatomic,assign)CGFloat maxCellHeight;
+@end
 
 @implementation JHPageCellFrame
 
@@ -45,13 +49,42 @@
     
     // 设置内容label的frame
     CGFloat contentLabelX = padding + iconViewW;
-    CGFloat contentLabelY = padding + iconViewH;
-    CGFloat contentLabelW = SCWidth - padding - iconViewW;
-    CGFloat contentLabelH = 200;
-    
+    CGFloat contentLabelY = padding + iconViewH + padding;
+    if (self.isOpenCellHeight) {
+        self.maxCellHeight = MAXFLOAT;
+    }else{
+        self.maxCellHeight = 50;
+    }
+    CGSize contentSize = [self sizeWithString:classPageModel.content font:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(SCWidth - nameLabelX - padding, self.maxCellHeight)];
+    CGFloat contentLabelW = contentSize.width;
+    CGFloat contentLabelH = contentSize.height;
     self.contentFrame = CGRectMake(contentLabelX, contentLabelY, contentLabelW, contentLabelH);
     
-    
+    // 判断是否有展开按钮, 有则创建, 没有则不创建
+    if ([self isExistOpenButton]) {
+        // 展开按钮frame
+        CGFloat openButtonX = 50;
+        CGFloat openButtonY = contentLabelY + contentLabelH + padding;
+        CGFloat openButtonW = 80;
+        CGFloat openButtonH = 30;
+        self.openButtonFrame = CGRectMake(openButtonX, openButtonY, openButtonW, openButtonH);
+        // 计算cell高度
+        self.cellHeight = openButtonY + openButtonH + padding;
+    }else{
+        // 计算cell高度
+        self.cellHeight = contentLabelY + contentLabelH + padding;
+    }
+}
+
+// 判断是否有展开按钮
+-(BOOL)isExistOpenButton{
+    CGSize contentCloseSize = [self sizeWithString:self.classPageModel.content font:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(SCWidth - 70, 50)];
+    CGSize contentOpenSize = [self sizeWithString:self.classPageModel.content font:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(SCWidth - 70, MAXFLOAT)];
+    if (contentOpenSize.height > contentCloseSize.height) {
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 /**

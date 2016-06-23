@@ -15,10 +15,12 @@
 #import "JHPageTableViewCell.h"
 #import "JHPageCellFrame.h"
 
-@interface JHMyClassViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface JHMyClassViewController ()<UITableViewDelegate,UITableViewDataSource,JHPageTableViewCellDelegate>
 @property (nonatomic, strong) UITableView *mainTableView; //页面主tableview
 @property(nonatomic,strong)NSMutableArray *pageModelArray; // 帖子模型列表
 @property(nonatomic,strong)JHClassPageListModel *classPageModel; // 帖子数据模型
+@property(nonatomic,strong)JHPageCellFrame *cellF;
+@property(nonatomic,strong)NSMutableArray *cellFrameArray;
 @end
 
 @implementation JHMyClassViewController
@@ -51,22 +53,32 @@
     parms[@"fid"] = @"";//班级id,返回第一个
     parms[@"parentFid"] = fid;//学校id
     parms[@"pageindex"] = @"0";
-    parms[@"pagesize"] = @"10";
+    parms[@"pagesize"] = @"30";
     parms[@"timestamp"] = realTime;
     parms[@"sign"] = [[[NSString stringWithFormat:@"%@%@%@%@",userID,parms[@"pageindex"],userKey,realTime] marchMd5String]uppercaseString];
     [[JHHTTPManager sharedManager] GET:JHMyClassInfo parameters:parms succeed:^(id responseObj) {
         // 解析
-//        JHMyClassPageModel *pageModel = [JHMyClassPageModel mj_objectWithKeyValues:responseObj];
-//        NSLog(@"返回的数据%@",pageModel.list);
         self.pageModelArray = [JHClassPageListModel mj_objectArrayWithKeyValuesArray:responseObj[@"list"]];
         [self.mainTableView reloadData];
-        NSLog(@"返回数据模型%@",self.pageModelArray);
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
+    } failure:^(NSError *error) { 
     }];
     DLog(@"不是吧%@",parms[@"parentFid"]);
 }
 
+
+#pragma mark - 自定义代理
+-(void)openCell:(UIButton *)button{
+    // 获取button所在的cell的NSIndexPath
+    JHPageTableViewCell *cell = (JHPageTableViewCell *)[[button superview] superview];
+    NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
+    DLog(@"展开按钮点击%ld",indexPath.row);
+    // 将frame数组的cell从新计算行高
+    JHPageCellFrame *cellF = self.cellFrameArray[indexPath.row];
+    cellF.isOpenCellHeight = !cellF.isOpenCellHeight;
+    // 赋值会从新计算cell的frame
+    cellF.classPageModel = self.pageModelArray[indexPath.row];
+    [self.mainTableView reloadData];
+}
 
 
 #pragma mark - tableview 代理方法及数据源方法
@@ -75,21 +87,15 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    static NSString *cellID = @"classPageCell";
-//    UITableViewCell *classPageCell = [tableView dequeueReusableCellWithIdentifier:cellID];
-//    if (classPageCell == nil) {
-//        classPageCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-//    }
-//    classPageCell.textLabel.text = @"吃屎";
     JHPageTableViewCell *classPageCell = [JHPageTableViewCell settingCellWithTableView:tableView style:UITableViewCellStyleDefault];
-    JHPageCellFrame *cellFrame = [[JHPageCellFrame alloc] init];
-    cellFrame.classPageModel = self.pageModelArray[indexPath.row];
-    classPageCell.pageCellFrame = cellFrame;
+    classPageCell.pageCellFrame = self.cellFrameArray[indexPath.row];
+    classPageCell.delegate = self;
     return classPageCell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 200;
+    JHPageCellFrame *cellF = self.cellFrameArray[indexPath.row];
+    return cellF.cellHeight;
 }
 
 
@@ -103,8 +109,22 @@
     return _mainTableView;
 }
 
-
-
+/**
+ *  懒加载获取cell的height
+ *
+ *  @return 保存cell的高度数组
+ */
+-(NSMutableArray *)cellFrameArray{
+    if (_cellFrameArray == nil) {
+        _cellFrameArray = [[NSMutableArray alloc] init];
+        for (JHClassPageListModel *pageModel in self.pageModelArray) {
+            JHPageCellFrame *cellFrame = [[JHPageCellFrame alloc] init];
+            cellFrame.classPageModel = pageModel;
+            [_cellFrameArray addObject:cellFrame];
+        }
+    }
+    return _cellFrameArray;
+}
 
 
 

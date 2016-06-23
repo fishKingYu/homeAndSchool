@@ -22,6 +22,8 @@
 @property(nonatomic,strong)UILabel *dateLabel;
 // 帖子内容
 @property(nonatomic,strong)UILabel *contentLabel;
+// 展开按钮
+@property(nonatomic,strong)UIButton *openButton;
 @end
 
 
@@ -33,6 +35,7 @@
     if (cell == nil) {
         cell = [[JHPageTableViewCell alloc] initWithStyle:style reuseIdentifier:ID];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -66,11 +69,30 @@
     self.dateLabel = dateLabel;
     // 日期时间
     UILabel *contentLabel = [[UILabel alloc] init];
-    contentLabel.lineBreakMode = NSLineBreakByWordWrapping;
     contentLabel.numberOfLines = 0;
-    
-    [self.contentView addSubview:contentLabel];
+    contentLabel.font = [UIFont systemFontOfSize:15];
+    contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    [self.contentView addSubview:contentLabel]; 
     self.contentLabel = contentLabel;
+    
+    UIButton *openButton = [[UIButton alloc] init];
+    [openButton setTitle:@"展开" forState:UIControlStateNormal];
+    [openButton setBackgroundColor:[UIColor grayColor]];
+    [openButton addTarget:self action:@selector(openButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:openButton];
+    self.openButton = openButton;
+    
+}
+
+/**
+ *  展开按钮点击事件
+ *
+ *  @param button 展开按钮
+ */
+-(void)openButtonClick:(UIButton *)button{
+    if ([self.delegate respondsToSelector:@selector(openCell:)]) {
+        [self.delegate openCell:button];
+    }
 }
 
 /**
@@ -84,6 +106,15 @@
     [self settingData];
     // 设置frame
     [self settingFrame];
+    // 设置展开关闭按钮
+    [self setOpenButtonTitle];
+}
+
+/**
+ *  设置展开关闭按钮
+ */
+-(void)setOpenButtonTitle{
+    [self.openButton setTitle:self.pageCellFrame.isOpenCellHeight ? @"关闭" : @"展开" forState:UIControlStateNormal];
 }
 
 /**
@@ -96,6 +127,7 @@
     self.statusLabel.text = [pageModel.type isEqualToString:@"1"] ? @"老师" : @"家长";
     self.dateLabel.text = pageModel.addtime;
     self.contentLabel.text = pageModel.content;
+    
 }
 
 /**
@@ -107,24 +139,15 @@
     self.statusLabel.frame = self.pageCellFrame.statusFrame;
     self.dateLabel.frame = self.pageCellFrame.dateFrame;
     self.contentLabel.frame = self.pageCellFrame.contentFrame;
-    [self.contentLabel sizeToFit];
-    CGSize size = [self.contentLabel sizeThatFits:CGSizeMake(self.contentLabel.frame.size.width, MAXFLOAT)];
-    self.contentLabel.frame =CGRectMake(60, 60, SCWidth - 70, size.height);
+    self.openButton.frame = self.pageCellFrame.openButtonFrame;
+    
     self.contentLabel.backgroundColor = [UIColor grayColor];
 }
 
--(void)setClassPageModel:(JHClassPageListModel *)classPageModel{
-    _classPageModel = classPageModel;
-    self.nameLabel.text = @"测试不就知道了么";
-}
-
-//-(UILabel *)nameLabel{
-//    if (_nameLabel == nil) {
-//        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 200, 60)];
-//        _nameLabel.textColor = [UIColor redColor];
-//        [self.contentView addSubview:_nameLabel];
-//    }
-//    return _nameLabel;
+//-(void)setClassPageModel:(JHClassPageListModel *)classPageModel{
+//    _classPageModel = classPageModel;
+//    self.nameLabel.text = @"测试不就知道了么";
 //}
+
 
 @end
