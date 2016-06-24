@@ -32,7 +32,7 @@
     [self setupView];
     
     // 加载数据
-    [self getSchoolDynamicPageWith:schoolID];
+    [self getSchoolDynamicPageWith:CLASSID];
 }
 
 #pragma mark - 初始化界面
@@ -50,23 +50,28 @@
 -(void)getSchoolDynamicPageWith:(NSString *)fid{
     NSMutableDictionary *parms = [NSMutableDictionary dictionary];
     parms[@"uid"] = userID;
-    parms[@"fid"] = @"";//班级id,返回第一个
-    parms[@"parentFid"] = fid;//学校id
+    parms[@"forumID"] = fid;//班级id,返回第一个
+//    parms[@"parentFid"] = fid;//学校id
     parms[@"pageindex"] = @"0";
     parms[@"pagesize"] = @"30";
     parms[@"timestamp"] = realTime;
-    parms[@"sign"] = [[[NSString stringWithFormat:@"%@%@%@%@",userID,parms[@"pageindex"],userKey,realTime] marchMd5String]uppercaseString];
-    [[JHHTTPManager sharedManager] GET:JHMyClassInfo parameters:parms succeed:^(id responseObj) {
+    parms[@"sign"] = [[[NSString stringWithFormat:@"%@%@%@%@%@",userID,fid,parms[@"pageindex"],userKey,realTime] marchMd5String]uppercaseString];
+    [[JHHTTPManager sharedManager] GET:JHGetPageList parameters:parms succeed:^(id responseObj) {
         // 解析
         self.pageModelArray = [JHClassPageListModel mj_objectArrayWithKeyValuesArray:responseObj[@"list"]];
         [self.mainTableView reloadData];
-    } failure:^(NSError *error) { 
-    }];
-    DLog(@"不是吧%@",parms[@"parentFid"]);
+    } failure:^(NSError *error) {
+        DLog(@"%@",error);
+    }]; 
 }
 
 
 #pragma mark - 自定义代理
+/**
+ *  展开收起按钮点击代理
+ *
+ *  @param button 展开或者收起按钮(为同一按钮,标题不同而已)
+ */
 -(void)openCell:(UIButton *)button{
     // 获取button所在的cell的NSIndexPath
     JHPageTableViewCell *cell = (JHPageTableViewCell *)[[button superview] superview];
@@ -90,6 +95,8 @@
     JHPageTableViewCell *classPageCell = [JHPageTableViewCell settingCellWithTableView:tableView style:UITableViewCellStyleDefault];
     classPageCell.pageCellFrame = self.cellFrameArray[indexPath.row];
     classPageCell.delegate = self;
+    // 刷新cell内的collectionView
+    [classPageCell.imgCollectionView reloadData];
     return classPageCell;
 }
 

@@ -21,7 +21,9 @@
 @property(nonatomic,strong)JHPageCellFrame *pageCellFrame;
 // cell在tableview中的位置indexpath
 @property(nonatomic,strong)NSIndexPath *indexPath;
+// 图片collectionView
+@property (nonatomic, strong) UICollectionView *imgCollectionView;
 
 +(instancetype)settingCellWithTableView:(UITableView *)tableView style:(UITableViewCellStyle)style;
-
+ 
 @end

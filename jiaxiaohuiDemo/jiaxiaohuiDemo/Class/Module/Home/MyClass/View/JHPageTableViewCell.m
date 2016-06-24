@@ -10,8 +10,9 @@
 #import "JHPageCellFrame.h"
 #import "JHClassPageListModel.h"
 #import "UIImageView+WebCache.h"
+#import "JHPageImageCollectionViewCell.h"
 
-@interface JHPageTableViewCell()
+@interface JHPageTableViewCell()<UICollectionViewDelegate,UICollectionViewDataSource>
 // 头像
 @property(nonatomic,strong)UIImageView *logoImageView;
 // 昵称
@@ -24,6 +25,7 @@
 @property(nonatomic,strong)UILabel *contentLabel;
 // 展开按钮
 @property(nonatomic,strong)UIButton *openButton;
+
 @end
 
 
@@ -75,6 +77,7 @@
     [self.contentView addSubview:contentLabel]; 
     self.contentLabel = contentLabel;
     
+    // 展开/收起按钮
     UIButton *openButton = [[UIButton alloc] init];
     [openButton setTitle:@"展开" forState:UIControlStateNormal];
     [openButton setBackgroundColor:[UIColor grayColor]];
@@ -82,18 +85,22 @@
     [self.contentView addSubview:openButton];
     self.openButton = openButton;
     
+    // 图片collectionView
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.itemSize = CGSizeMake(100, 100); // 设置每个item的大小
+    layout.sectionInset = UIEdgeInsetsMake(10, 0, 0, 0); // 设置内边距
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:layout]; // 这里赋值的frame不起作用
+    collectionView.backgroundColor = [UIColor whiteColor];
+    collectionView.delegate = self;
+    collectionView.dataSource = self;
+    // 注册cell
+    [collectionView registerClass:[JHPageImageCollectionViewCell class] forCellWithReuseIdentifier:@"collectionCell"];
+    [self.contentView addSubview:collectionView];
+    self.imgCollectionView = collectionView;
+    
 }
 
-/**
- *  展开按钮点击事件
- *
- *  @param button 展开按钮
- */
--(void)openButtonClick:(UIButton *)button{
-    if ([self.delegate respondsToSelector:@selector(openCell:)]) {
-        [self.delegate openCell:button];
-    }
-}
+
 
 /**
  *  数据源
@@ -114,7 +121,7 @@
  *  设置展开关闭按钮
  */
 -(void)setOpenButtonTitle{
-    [self.openButton setTitle:self.pageCellFrame.isOpenCellHeight ? @"关闭" : @"展开" forState:UIControlStateNormal];
+    [self.openButton setTitle:self.pageCellFrame.isOpenCellHeight ? @"收起" : @"展开" forState:UIControlStateNormal];
 }
 
 /**
@@ -140,14 +147,49 @@
     self.dateLabel.frame = self.pageCellFrame.dateFrame;
     self.contentLabel.frame = self.pageCellFrame.contentFrame;
     self.openButton.frame = self.pageCellFrame.openButtonFrame;
+    self.imgCollectionView.frame = self.pageCellFrame.imgCollectionFrame;
     
     self.contentLabel.backgroundColor = [UIColor grayColor];
 }
 
-//-(void)setClassPageModel:(JHClassPageListModel *)classPageModel{
-//    _classPageModel = classPageModel;
-//    self.nameLabel.text = @"测试不就知道了么";
-//}
+#pragma mark - collectionView 代理
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    JHPageCellFrame *cellF = self.pageCellFrame;
+//    DLog(@"cell内的item数%lu",(unsigned long)[cellF hasImageArray].count);
+    return [cellF hasImageArray].count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    //1.获得可重用的cell
+    JHPageImageCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
+    
+    //2.对cell进行赋值
+    NSArray *arr = [self.pageCellFrame hasImageArray];
+    cell.imageName = arr[indexPath.item][@"url"];
+    
+    DLog(@"图片url:  %@",cell.imageName);
+    return cell;
+}
+
+
+
+
+#pragma mark - 按钮点击事件
+/**
+ *  展开按钮点击事件
+ *
+ *  @param button 展开按钮
+ */
+-(void)openButtonClick:(UIButton *)button{
+    if ([self.delegate respondsToSelector:@selector(openCell:)]) {
+        [self.delegate openCell:button];
+    }
+}
+
 
 
 @end

@@ -15,10 +15,12 @@
 #define RGBA(r,g,b,a) [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]
 
 
-#define userID @"2681"
+#define userID @"2830" // 2830
 #define userKey @"metcd"
 #define realTime  [NSString stringWithFormat:@"%ld",time(NULL)]
-#define schoolID @"246"
+#define SCHOOLID @"246"
+#define CLASSID @"251"
+// 班级id 249 251
 
 // 常量文件
 #import "MRConst.h"

@@ -21,12 +21,15 @@
 @property(nonatomic,assign)CGRect contentFrame;
 // 展开按钮
 @property(nonatomic,assign)CGRect openButtonFrame;
+// 图片collectionView
+@property (nonatomic, assign) CGRect imgCollectionFrame;
 // cell 高度
 @property(nonatomic,assign)CGFloat cellHeight;
 // 是否展开
 @property(nonatomic,assign)BOOL isOpenCellHeight;
-// 是否有展开按钮
-//@property(nonatomic,assign)BOOL isExistOpenButton;
+
 // 帖子数据模型
 @property(nonatomic,weak)JHClassPageListModel *classPageModel;
+
+-(NSMutableArray *)hasImageArray;
 @end
