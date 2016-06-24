@@ -30,13 +30,13 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.backgroundColor = [UIColor blueColor];
-    
-    
+}
+
+-(void)setImageName:(NSString *)imageName{
+    _imageName = imageName;
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:self.imageName] placeholderImage:[UIImage imageNamed:@"camera"]];
     self.imgView.frame = CGRectMake(0, 0, self.contentView.bounds.size.width, self.contentView.bounds.size.height);
 }
 
-- (void)prepareForReuse{
-    
-}
+
 @end
