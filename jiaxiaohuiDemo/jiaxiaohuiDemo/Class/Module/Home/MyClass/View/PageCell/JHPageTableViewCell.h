@@ -19,8 +19,6 @@
 @property(nonatomic,weak)id<JHPageTableViewCellDelegate> delegate;
 // frame数据源
 @property(nonatomic,strong)JHPageCellFrame *pageCellFrame;
-// cell在tableview中的位置indexpath
-@property(nonatomic,strong)NSIndexPath *indexPath;
 // 图片collectionView
 @property (nonatomic, strong) UICollectionView *imgCollectionView;
 

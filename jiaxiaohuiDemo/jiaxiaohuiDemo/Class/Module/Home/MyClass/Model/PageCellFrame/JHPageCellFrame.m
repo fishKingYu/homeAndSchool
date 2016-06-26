@@ -76,14 +76,34 @@
     // 图片collectionView
     NSArray *imgArray = [self hasImageArray];
     if (imgArray.count != 0) {
+        // 计算创建多少行cell
         NSInteger line = imgArray.count / 3.5 + 1;
-//        DLog(@"行数%ld",(long)line);
         CGFloat collectionViewX = contentLabelX;
         CGFloat collectionViewY = self.indexY;
         CGFloat collectionViewW = SCWidth - nameLabelX - padding;
         CGFloat collectionViewH = (100 + padding * 2) * line;
         self.imgCollectionFrame = CGRectMake(collectionViewX, collectionViewY, collectionViewW, collectionViewH);
         self.indexY = collectionViewY + collectionViewH + padding;
+    }
+    
+    // mp3播放进度条
+    if (![NSString isBlankString:classPageModel.mp3Url]) {
+        CGFloat mp3PlayViewX = contentLabelX;
+        CGFloat mp3PlayViewY = self.indexY;
+        CGFloat mp3PlayViewW = 260;
+        CGFloat mp3PlayViewH = 40;
+        self.mp3PlayViewFrame = CGRectMake(mp3PlayViewX, mp3PlayViewY, mp3PlayViewW, mp3PlayViewH);
+        self.indexY = mp3PlayViewY + mp3PlayViewH + padding;
+    }
+    
+    // 回复列表
+    if (classPageModel.reply.count != 0) {
+        CGFloat replyTableViewX = contentLabelX;
+        CGFloat replyTableViewY = self.indexY;
+        CGFloat replyTableViewW = SCWidth - contentLabelX - padding;
+        CGFloat replyTableViewH = 200;
+        self.replyTableViewFrame = CGRectMake(replyTableViewX, replyTableViewY, replyTableViewW, replyTableViewH);
+        self.indexY = replyTableViewY + replyTableViewH + padding;
     }
     
     // 计算cell高度

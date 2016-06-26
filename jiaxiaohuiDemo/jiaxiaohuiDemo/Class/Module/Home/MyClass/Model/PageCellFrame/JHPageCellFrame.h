@@ -23,6 +23,10 @@
 @property(nonatomic,assign)CGRect openButtonFrame;
 // 图片collectionView
 @property (nonatomic, assign) CGRect imgCollectionFrame;
+// mp3播放条
+@property(nonatomic,assign)CGRect mp3PlayViewFrame;
+// 回复列表
+@property(nonatomic,assign)CGRect replyTableViewFrame;
 // cell 高度
 @property(nonatomic,assign)CGFloat cellHeight;
 // 是否展开
