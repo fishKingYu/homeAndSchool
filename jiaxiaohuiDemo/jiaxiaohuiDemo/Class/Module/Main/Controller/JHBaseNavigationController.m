@@ -34,7 +34,7 @@
          UIBarMetricsDefault, 横屏竖屏都可以使用
          UIBarMetricsCompact, 只有横屏可以使用
          */
-        [bar setBackgroundImage:[UIImage imageNamed:@"NavBar64"] forBarMetrics:UIBarMetricsDefault];
+        [bar setBackgroundImage:[UIImage imageNamed:@"nav"] forBarMetrics:UIBarMetricsDefault];
         
         // 设置背景颜色
         //    bar.barTintColor = [UIColor redColor];

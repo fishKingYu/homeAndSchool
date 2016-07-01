@@ -20,6 +20,13 @@
 #define realTime  [NSString stringWithFormat:@"%ld",time(NULL)]
 #define SCHOOLID @"246"
 #define CLASSID @"251"
+
+// xmpp
+#define jh_Host_Name @"127.0.0.1"
+#define jh_Host_Port 5222
+#define jh_XMPP_Domian @"127.0.0.1"
+#define jh_XMPP_Resource @"传智微信v0.9"
+
 // 班级id 249 251
 
 // 常量文件
@@ -29,6 +36,10 @@
 #import "UIImage+march.h"
 #import "UIView+march.h"
 #import "JHHTTPManager.h"
+//xmpp框架主要头文件
+#import <XMPPFramework/XMPPFramework.h>
+//XMPP管理者
+#import "JHXMPPManager.h"
 
 //测试url
 #define hostURL  @"http://api.w.metcd.com/"
